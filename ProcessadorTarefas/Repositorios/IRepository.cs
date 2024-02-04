@@ -1,6 +1,6 @@
-﻿namespace SOLID_Example.Interfaces
+﻿namespace ProcessadorTarefas.Repositorios
 {
-    internal interface IRepository<T>
+    public interface IRepository<T>
     {
         IEnumerable<T> GetAll();
         T? GetById(int id);
