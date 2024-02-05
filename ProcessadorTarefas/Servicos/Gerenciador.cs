@@ -7,7 +7,7 @@ namespace ProcessadorTarefas.Servicos
     public interface IGerenciadorTarefas
     {
         Task<Tarefa> Criar();
-        Task<Tarefa> Consultar(int idTarefa);
+        Task<Tarefa?> Consultar(int idTarefa);
         Task Cancelar(int idTarefa);
         Task<IEnumerable<Tarefa>> ListarAtivas();
         Task<IEnumerable<Tarefa>> ListarInativas();
@@ -15,10 +15,6 @@ namespace ProcessadorTarefas.Servicos
 
     public class Gerenciador : IGerenciadorTarefas
     {
-        private const int minDuracaoSubtarefa = 3;
-        private const int maxDuracaoSubtarefa = 10;
-        private const int minSubtarefas = 1;
-        private const int maxSubtarefas = 10;
 
         private readonly IRepository<Tarefa> _tarefaRepository;
         private readonly IServiceProvider _serviceProvider;
@@ -50,8 +46,8 @@ namespace ProcessadorTarefas.Servicos
                 throw new Exception("Não foi possível acessar o processador de tarefas.");
         }
 
-        public async Task<Tarefa> Consultar(int idTarefa)
-            => await Task.FromResult(_tarefaRepository.GetById(idTarefa)!);
+        public async Task<Tarefa?> Consultar(int idTarefa)
+            => await Task.FromResult(_tarefaRepository.GetById(idTarefa));
         
         public async Task<Tarefa> Criar()
         {
@@ -62,8 +58,6 @@ namespace ProcessadorTarefas.Servicos
             _tarefaRepository.Add(novaTarefa);
             return await Task.FromResult(novaTarefa);
         }
-
-        
 
         public async Task<IEnumerable<Tarefa>> ListarAtivas()
         {

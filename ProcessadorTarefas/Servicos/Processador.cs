@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using ProcessadorTarefas.Entidades;
 using System.Diagnostics;
-using System.Linq;
 
 namespace ProcessadorTarefas.Servicos
 {
@@ -124,7 +123,7 @@ namespace ProcessadorTarefas.Servicos
                 for (int i = 0; i < (limitTasksScheduled - FilaTarefasAgendadas.Count); i++)
                     if(TarefasDisponiveis.Count > 0)
                     {
-                        var tarefaDisponivelSelecionada = TarefasDisponiveis.First().Value;
+                        var tarefaDisponivelSelecionada = TarefasDisponiveis.OrderBy(x => x.Key).Take(1).Single().Value;
                         tarefaDisponivelSelecionada.Agendar();
                         FilaTarefasAgendadas.Enqueue(tarefaDisponivelSelecionada);
                         TarefasDisponiveis.Remove(tarefaDisponivelSelecionada.Id);

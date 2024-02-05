@@ -17,7 +17,6 @@ namespace ConsoleUI
             TarefasInativas = 2
         }
 
-
         static async Task Main(string[] args)
         {
             var visaoAtual = Visualizacao.NaoDefinida;
@@ -118,8 +117,8 @@ namespace ConsoleUI
 
             IServiceCollection services = new ServiceCollection();
             services.AddScoped(_ => configuration);
-            //services.AddScoped<IRepository<Tarefa>, MemoryRepository>();
-            services.AddScoped<IRepository<Tarefa>>(_ => new SqliteRepository<Tarefa>(connectionString) );
+            services.AddScoped<IRepository<Tarefa>, MemoryRepository>();
+            //services.AddScoped<IRepository<Tarefa>>(_ => new SqliteRepository<Tarefa>(connectionString) );
             services.AddSingleton<IProcessadorTarefas, Processador>();
             services.AddScoped<IGerenciadorTarefas, Gerenciador>(serviceProvider =>
             {
@@ -172,7 +171,6 @@ namespace ConsoleUI
 
             Console.WriteLine(sb.ToString());
         }
-
         static void ImprimirProgressoTarefas(IGerenciadorTarefas gerenciadorTarefas)
         {
             const int BAR_SIZE = 50;
@@ -194,43 +192,5 @@ namespace ConsoleUI
 
             Console.WriteLine(sb.ToString());
         }
-
-        //static void Main(string[] args)
-        //{
-        //    string connectionString = "Data Source=database.db";
-        //    InicializarDatabase(connectionString);
-        //    var livroRepository = new LivroSqliteRepository(connectionString);
-
-        //    var novoLivro = new Livro
-        //    {
-        //        Id = 5,
-        //        Publicacao = new DateOnly(2005, 05, 23),
-        //        Autores = "Eu, eu mesmo e Irene",
-        //        Resumo = "Fala sobre algum assunto aleatório que não é importante para o nosso exemplo",
-        //        Titulo = "Éramos dois"
-        //    };
-
-        //    livroRepository.Add(novoLivro);
-
-        //}
-
-        //private static void InicializarDatabase(string connectionString)
-        //{
-        //    using var connection = new SqliteConnection(connectionString);
-        //    connection.Open();
-
-        //    using var command = new SqliteCommand(@$"
-        //        CREATE TABLE IF NOT EXISTS Livro(
-        //            {nameof(Livro.Id)} INTEGER PRIMARY KEY,
-        //            {nameof(Livro.Titulo)} TEXT NOT NULL,
-        //            {nameof(Livro.Autores)} TEXT NOT NULL,
-        //            {nameof(Livro.Resumo)} TEXT NULL,
-        //            {nameof(Livro.Publicacao)} DATE NULL
-        //        );
-        //        ", connection);
-
-        //    command.ExecuteNonQuery();
-        //}
-
     }
 }

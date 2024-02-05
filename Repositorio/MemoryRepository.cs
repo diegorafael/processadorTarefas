@@ -8,7 +8,7 @@ namespace Repositorio
     {
         private List<Tarefa> InicializarDatabase()
         {
-            const int NumeroTarefas = 20;
+            const int NumeroTarefas = 10;
 
             var result = new List<Tarefa>();
 

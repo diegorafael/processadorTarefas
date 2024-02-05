@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Data;
 
 namespace ProcessadorTarefas.Entidades
 {
@@ -32,20 +30,6 @@ namespace ProcessadorTarefas.Entidades
         {
             
         }
-
-        //public static Tarefa Read(IDataReader dataReader)
-        //{
-        //    var tarefa = new Tarefa
-        //    {
-        //        Id = Convert.ToInt32(dataReader[nameof(Id)]),
-        //        Estado = Enum.Parse<EstadoTarefa>(dataReader[nameof(Estado)].ToString()),
-        //        IniciadaEm = DateTime.TryParse(dataReader[nameof(IniciadaEm)].ToString(), out var iniciadaEm) ? iniciadaEm : null,
-        //        EncerradaEm = DateTime.TryParse(dataReader[nameof(EncerradaEm)].ToString(), out var encerradaEm) ? encerradaEm : null,
-        //        SubtarefasExecutadas = 
-        //    };
-
-        //    return tarefa;
-        //}
 
         public static Tarefa Criar(int id, IConfiguration? configs = null)
         {
