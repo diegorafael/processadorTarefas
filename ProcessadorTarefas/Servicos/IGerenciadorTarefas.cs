@@ -2,7 +2,7 @@
 
 namespace ProcessadorTarefas.Servicos
 {
-    internal interface IGerenciadorTarefas
+    public interface IGerenciadorTarefas
     {
         Task<Tarefa> Criar();
         Task<Tarefa> Consultar(int idTarefa);
