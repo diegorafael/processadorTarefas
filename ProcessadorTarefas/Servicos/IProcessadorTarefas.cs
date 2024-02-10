@@ -1,8 +1,10 @@
 ﻿namespace ProcessadorTarefas.Servicos
 {
-    internal interface IProcessadorTarefas
+    public interface IProcessadorTarefas<T,Y>
     {
-        Task Iniciar();
+        Task ProcessarTarefasAsync(int tarefasEmParalelo);
+        Task IniciarTarefaAsync(T entity);
+        Task IniciarSubtarefasAsync(Y entity);
         Task CancelarTarefa(int idTarefa);
         Task Encerrar();
     }
